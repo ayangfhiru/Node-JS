@@ -19,4 +19,17 @@ route.get('/notes/:id', async(req, res)=>{
     res.json(getNotesById);
 });
 
+route.put('/notes/:id', async(req, res)=>{
+    const noteId = req.params.id;
+    const {title, body} = req.body;
+    const editNote = await new NotesServices().editNotesById(noteId, {title, body});
+    res.json(editNote);
+})
+
+route.delete('/notes/:id', async(req, res)=>{
+    const noteId = req.params.id;
+    const deleteNote = await new NotesServices().deleteNotesById(noteId);
+    res.json(deleteNote);
+})
+
 module.exports = route;
