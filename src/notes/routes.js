@@ -1,5 +1,5 @@
 const express = require('express');
-const { schema } = require('../validation');
+// const { schema } = require('../validation');
 const validateNote = require('../validation');
 const NotesServices = require('./services');
 const route = express.Router();
