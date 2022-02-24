@@ -6,7 +6,7 @@ const route = express.Router();
 
 route.post('/notes', async(req, res)=>{
     try {
-        await validateNote.validateAsync(req.body)
+        // await validateNote.validateAsync(req.body)
         const notes = await new NotesServices().addNotes(req.body);
         res.json({
             status: 'Success',

@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const notesRoute = require('./src/notes/routes');
+const tagsRoute = require('./src/tags/routes')
 const multer = require('multer');
 const port =  process.env.PORT;
 const host = process.env.HOST;
@@ -14,7 +15,7 @@ app.use(
         extended: true
     })
 )
-app.use(notesRoute);
+app.use(notesRoute).use(tagsRoute);
 
 app.get('/', (req, res)=>{
     res.send('Hello World!');
