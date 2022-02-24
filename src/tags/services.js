@@ -22,6 +22,24 @@ class TagServices{
         return result.rows;
     }
 
+    async getTagById(tagId){
+        const query = {
+            text: 'SELECT * FROM tags WHERE id = $1',
+            values: [tagId]
+        }
+        const result = await this._pool.query(query);
+        return result.rows[0]
+    }
+
+    async getNotesByIdTags(tagId){
+        const query = {
+            text: 'SELECT notes.* FROM notes JOIN tags ON tags.id = notes.tag_id WHERE tags.id = $1',
+            values: [tagId]
+        }
+        const result = await this._pool.query(query);
+        return result;
+    }
+
 }
 
 module.exports = TagServices;
