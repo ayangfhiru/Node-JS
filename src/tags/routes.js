@@ -19,4 +19,26 @@ route.get("/tags", async (req, res) => {
   });
 });
 
+route.get("/tags/:id", async(req, res) => {
+    const tagId = req.params.id;
+    const tags = await new TagServices().getTagById(tagId);
+    const notes = await new TagServices().getNotesByIdTags(tagId);
+
+    const data = {
+        id: tags.id,
+        name: tags.name,
+        countNotes: notes.rowCount,
+        notes: notes.rows.map((element) => ({
+            id: element.id,
+            title: element.title,
+            body: element.body
+        }))
+    }
+
+    res.json({
+        status: 'Success',
+        data: data
+    })
+})
+
 module.exports = route;
